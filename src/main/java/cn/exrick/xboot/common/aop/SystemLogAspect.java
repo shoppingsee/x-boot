@@ -139,16 +139,16 @@ public class SystemLogAspect {
                     //IP地址
                     log.setIpInfo(ipInfoUtil.getIpCity(ipInfoUtil.getIpAddr(request)));
                     //请求开始时间
-                    Date logStartTime = beginTimeThreadLocal.get();
+                    //Date logStartTime = beginTimeThreadLocal.get();
 
                     long beginTime = beginTimeThreadLocal.get().getTime();
                     long endTime = System.currentTimeMillis();
                     //请求耗时
                     Long logElapsedTime = endTime - beginTime;
                     log.setCostTime(logElapsedTime.intValue());
-                    ipInfoUtil.getInfo(request, ObjectUtil.mapToStringAll(request.getParameterMap()));
+                    //ipInfoUtil.getInfo(request, ObjectUtil.mapToStringAll(request.getParameterMap()));
 
-                    //调用线程保存至ES
+                    //调用线程保存至数据库
                     ThreadPoolUtil.getPool().execute(new SaveSystemLogThread(log, logService));
                 }
             }
